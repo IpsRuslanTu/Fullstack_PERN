@@ -2,22 +2,14 @@ import {makeAutoObservable} from "mobx";
 
 export default class DeviceStore {
     constructor() {
-        this._types = [
-            {id: 1, name: 'Холодильники'},
-            {id: 2, name: 'Смартфоны'}
-        ]
-        this._brands = [
-            {id: 1, name: 'Samsung'},
-            {id: 2, name: 'Apple'}
-        ]
-        this._devices = [
-            {id: 1, name: 'IPhone 12 pro', price: 100000, rating: 5, img: 'https://iphonemania.su/wp-content/uploads/2021/01/iphone-12-blue-select-2020-2.png'},
-            {id: 2, name: 'IPhone 12 pro', price: 100000, rating: 5, img: 'https://iphonemania.su/wp-content/uploads/2021/01/iphone-12-blue-select-2020-2.png'},
-            {id: 3, name: 'IPhone 12 pro', price: 100000, rating: 5, img: 'https://iphonemania.su/wp-content/uploads/2021/01/iphone-12-blue-select-2020-2.png'},
-            {id: 4, name: 'IPhone 12 pro', price: 100000, rating: 5, img: 'https://iphonemania.su/wp-content/uploads/2021/01/iphone-12-blue-select-2020-2.png'}
-        ]
+        this._types = []
+        this._brands = []
+        this._devices = []
         this._selectedType = {}
         this._selectedBrand = {}
+        this._page = 1
+        this._totalCount = 0
+        this._limit = 3
         makeAutoObservable(this)
     }
 
@@ -39,10 +31,24 @@ export default class DeviceStore {
 
     setSelectedBrand(brand) {
         this._selectedBrand = brand
+        this.setPage(1)
+    }
+
+    setPage(page) {
+        this._page = page
+    }
+
+    setTotalCount(count) {
+        this._totalCount = count
+    }
+
+    setLimit(limit) {
+        this._limit = limit
     }
 
     get selectedBrand() {
         return this._selectedBrand
+        this.setPage(1)
     }
 
     get types() {
@@ -59,5 +65,17 @@ export default class DeviceStore {
 
     get selectedType() {
         return this._selectedType
+    }
+
+    get page() {
+        return this._page
+    }
+
+    get totalCount() {
+        return this._totalCount
+    }
+
+    get limit() {
+        return this._limit
     }
 }

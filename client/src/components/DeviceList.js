@@ -9,7 +9,7 @@ const DeviceList = () => {
 
   return (
     <Row>
-      {device.devices.map(d => <DeviceItem device={d} />)}
+      {device.devices.map(d => <DeviceItem key={d.id} device={d} />)}
     </Row>
   );
 };

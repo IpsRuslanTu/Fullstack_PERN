@@ -16,7 +16,7 @@ const DeviceItem = ({device}) => {
         className='mt-3'
         onClick={() => navigate(DEVICE_ROUTE + '/' + device.id)}
       >
-        <Image src={device.img} width={150} height={150}/>
+        <Image src={process.env.REACT_APP_API_URL + device.img} width={150} height={150}/>
         <div className='d-flex justify-content-between align-items-center mt-1 text-black-50'>
           <div>Samsung...</div>
           <div className='d-flex align-items-center'>

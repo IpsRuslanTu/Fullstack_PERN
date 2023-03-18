@@ -1,13 +1,23 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Card, Col, Container, Image, Row} from 'react-bootstrap'
 import star from '../assets/star.png'
+import {useParams} from 'react-router-dom'
+import {fetchDevice} from '../http/deviceApi'
 
 const DevicePage = () => {
+  const {id} = useParams()
+
+  const [device, setDevice] = useState({info: []})
+
+  useEffect(() => {
+    fetchDevice(id).then(data => setDevice(data))
+  }, [])
+
   return (
     <Container>
       <div>
         <Col md={4}>
-          <Image width={300} height={300} src={device.img}/>
+          <Image width={300} height={300} src={process.env.REACT_APP_API_URL + device.img}/>
         </Col>
         <Col md={4}>
           <div className='d-flex flex-column'>
@@ -38,7 +48,7 @@ const DevicePage = () => {
       </div>
       <div className='d-flex flex-column m-3'>
         <h1>Характеристики</h1>
-        {description.map((d, index) =>
+        {device.info.map((d, index) =>
           <Row
             key={d.id}
             style={{background: index / 2 === 0 ? 'lightgray' : 'transparent', padding: 10}}

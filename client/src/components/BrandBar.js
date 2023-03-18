@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {observer} from 'mobx-react-lite'
 import {Context} from '../index'
-import {Card, Row} from 'react-bootstrap'
+import {Card} from 'react-bootstrap'
 
 const BrandBar = () => {
   const {device} = useContext(Context)
@@ -12,7 +12,7 @@ const BrandBar = () => {
         <Card
           key={brand.id}
           className='p-2'
-          role='button'
+          style={{userSelect: 'none', cursor: 'pointer'}}
           border={brand === device.selectedBrand ? 'danger' : 'light'}
           onClick={() => device.setSelectedBrand(brand)}
         >
